@@ -1,45 +1,42 @@
-print("Practico 2 - Ejercicio 1")
+import re
 
-class email:
-    #ATRIBITOS DE LA CLASS"
-    idCuenta= ""
-    dominio= "nada"
-    tipoDominio= "nada"
-    contraseña="nada"
+class Email:
+    __idCuenta: str
+    __tipoDominio: str
+    __dominio:str
+    __contraseña: str
     
-    #metodo constructor
-    def _init_(self, idCuenta, dominio, tipoDominio, contraseña):
-        self.idCuenta= idCuenta
-        self.dominio=dominio 
-        self.tipoDominio=tipoDominio
-        self.contraseña=contraseña
-
-    #Método “retornaEmail()” 
-    def retornaEmail(self, idCuenta, dominio, tipoDominio):
-        self.idCuenta= idCuenta
-        self.dominio=dominio
-        self.tipoDominio=tipoDominio
-        nuevoEmail= idCuenta+"@"+dominio+"."+tipoDominio
-        return nuevoEmail
-    #retorna dominio: 
-    def getDominio():
-        return self.dominio
     
-    #crear cuenta
-    def crearCuenta(self):
-        self.idCuenta=input("Dime tu idCuenta: ")
-        self.dominio=input("Dime tu dominio: ")
-        self.tipoDominio=input("Dime tu tipoDominio: ")
-        self.tipoDominio=input("Dime tu contraseña: ")
-
-if __name__=='__main__':
-    #no se como instanciar (diapo 34)
-    email1=email()
-    #ingresa por tecado los datos
-    idCuenta=input("Dime tu idCuenta: ")
-    dominio=input("Dime tu dominio: ")
-    tipoDominio=input("Dime tu tipoDominio: ")
-#llamadas:
-nuevo=email1.retornaEmail(idCuenta, dominio, tipoDominio)
-print("correo", nuevo)
-
+    def __init__(self,idCuenta,tipoDominio,dominio,contraseña):
+        self.__idCuenta = idCuenta
+        self.__tipoDominio = tipoDominio
+        self.__dominio = dominio
+        self.__contraseña = contraseña
+        
+    def __str__(self):
+        return '%s@%s.%s' % (self.__idCuenta,self.__tipoDominio,self.__dominio)
+        
+    def retornaEmail(self):
+        return ('{}@{}.{}'.format(self.__idCuenta,self.__tipoDominio,self.__dominio))
+        
+    def getDominio (self):
+        return self.__dominio
+    
+    def cambiarContra(self):
+        contraVieja = input('Ingrese contraseña actual: ')
+        while(contraVieja != self.__contraseña):
+            contraVieja = input('Error, contraseña incorrecta. Vuelva a ingresar: ')
+            
+        contraNueva = input('Ingrese contraseña nueva: ')
+        self.__contraseña = contraNueva
+        print('Cambio de contraseña exitoso.')
+    
+    def validar(self,mail):
+        if re.match ('^[(a-z0-9\_\-\.)]+@[(a-z0-9\_\-\.)]+\.[(a-z)]{2,15}$',mail):
+            print('\n Correo ingresado correctamente.')
+            em,em1 = mail.split('@')
+            em1,em2 = em1.split('.')
+            nuevacontra = input('Ingrese contraseña: ')
+            nuevoMail = Email(em,em1,em2,nuevacontra)
+            return nuevoMail
+        else: print('\n Correo ingresado incorrecto.')
