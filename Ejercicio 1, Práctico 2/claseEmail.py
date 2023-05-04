@@ -32,17 +32,14 @@ class email:
         self.tipoDominio=input("Dime tu tipoDominio: ")
         self.tipoDominio=input("Dime tu contraseña: ")
 
-    if __name__=='__main__':
-        #no se como instanciar (diapo 34)
-        email1=email()
-        #ingresa por tecado los datos
-        idCuenta=input("Dime tu idCuenta: ")
-        dominio=input("Dime tu dominio: ")
-        tipoDominio=input("Dime tu tipoDominio: ")
-        #llamadas:
-        email1.retornaEmail(self, idCuenta, dominio, tipoDominio)
+if __name__=='__main__':
+    #no se como instanciar (diapo 34)
+    email1=email()
+    #ingresa por tecado los datos
+    idCuenta=input("Dime tu idCuenta: ")
+    dominio=input("Dime tu dominio: ")
+    tipoDominio=input("Dime tu tipoDominio: ")
+#llamadas:
+nuevo=email1.retornaEmail(idCuenta, dominio, tipoDominio)
+print("correo", nuevo)
 
-        #print("el dominio es: " self.dominio)
-
-        email1.crearCuenta()
-    
